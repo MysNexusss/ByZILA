@@ -1,1 +1,36 @@
+<div class="auth-layout">
+  <div class="card auth-card">
+    <div class="auth-brand">
+      <span class="auth-brand-name">Nexora Financial</span>
+    </div>
 
+    <h1 class="auth-title">Criar conta</h1>
+    <p class="auth-subtitle">Leva menos de um minuto.</p>
+
+    <form id="register-form" novalidate>
+      <div class="stack" style="--stack-gap: var(--space-5);">
+        <div class="field">
+          <label class="label" for="register-email">E-mail</label>
+          <input class="input" type="email" id="register-email" name="email" autocomplete="email" placeholder="voce@exemplo.com" required>
+          <span class="hint hint--error" data-error-for="register-email" hidden></span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="register-password">Senha</label>
+          <input class="input" type="password" id="register-password" name="password" autocomplete="new-password" placeholder="Mínimo de 6 caracteres" required minlength="6">
+          <span class="hint hint--error" data-error-for="register-password" hidden></span>
+        </div>
+
+        <div class="field">
+          <label class="label" for="register-password-confirm">Confirmar senha</label>
+          <input class="input" type="password" id="register-password-confirm" name="passwordConfirm" autocomplete="new-password" placeholder="Repita a senha" required>
+          <span class="hint hint--error" data-error-for="register-password-confirm" hidden></span>
+        </div>
+
+        <button class="btn btn--primary btn--lg" type="submit" id="register-submit">Criar conta</button>
+      </div>
+    </form>
+
+    <p class="auth-footer">Já tem uma conta? <a href="#/login">Entrar</a></p>
+  </div>
+</div>
