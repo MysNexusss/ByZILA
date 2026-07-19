@@ -4,10 +4,10 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 5 — Fluxo completo de autenticação (Login,
-> Cadastro, logout, recuperação de sessão e proteção de rotas). O
-> Dashboard ainda é um placeholder temporário — a tela real chega na
-> próxima fase.
+> **Status atual:** Fase 6 — Dashboard real, com dados vindos do
+> Supabase (saldo, resumo mensal, últimas transações, metas em
+> andamento, dívidas em aberto). Ainda não há cadastro de transações,
+> gráficos ou gestão completa de metas/dívidas — só leitura.
 
 ### Testando a autenticação
 
@@ -169,7 +169,8 @@ Acesse `http://localhost:8080`.
 - [x] **Fase 3** — Infraestrutura Supabase (client, config, contrato de autenticação)
 - [x] **Fase 4** — Schema do banco de dados e Row Level Security
 - [x] **Fase 5** — Autenticação completa (login, cadastro, logout, sessão, rotas protegidas)
-- [ ] **Fase 6** — Dashboard real e repositories (transações, metas, dívidas, categorias)
-- [ ] **Fase 7** — Telas restantes (transações, estatísticas, metas, dívidas, perfil)
-- [ ] **Fase 8** — PWA completa (manifest, service worker, ícones, offline)
-- [ ] **Fase 9** — Deploy e ajustes finais no GitHub Pages
+- [x] **Fase 6** — Dashboard real (leitura de saldo, transações, metas e dívidas)
+- [ ] **Fase 7** — Cadastro/edição de transações, metas e dívidas
+- [ ] **Fase 8** — Estatísticas com gráficos e perfil do usuário
+- [ ] **Fase 9** — PWA completa (manifest, service worker, ícones, offline)
+- [ ] **Fase 10** — Deploy e ajustes finais no GitHub Pages
