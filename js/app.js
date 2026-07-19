@@ -2,22 +2,37 @@
  * app.js
  * ============================================================================
  * Ponto de entrada da aplicação Nexora Financial.
- *
- * Responsabilidades futuras:
- *  - Aguardar o DOM estar pronto e inicializar o App Shell (header,
- *    sidebar, bottom-navigation) chamando seus respectivos init*().
- *  - Inicializar router.js e disparar a renderização da rota inicial
- *    dentro de #route-outlet.
- *  - Registrar o Service Worker da PWA.
- *
- * Ordem de inicialização prevista:
- *  1. config.js   → carrega constantes/credenciais públicas
- *  2. supabase.js → instancia o client
- *  3. auth.js     → verifica sessão atual
- *  4. ui.js       → prepara utilitários de interface (modal, toast, loader)
- *  5. router.js   → inicia o roteamento e renderiza a rota atual
- *
- * Status: 🚧 Não implementado — fase atual: App Shell (arquitetura).
- * Depende de: config.js, supabase.js, auth.js, router.js, ui.js
  * ============================================================================
  */
+
+import { initAuth, logout } from './auth.js';
+import { initRouter } from './router.js';
+import { showToast } from '../components/toast/toast.js';
+
+/**
+ * Delegação global de clique para qualquer botão de logout do App Shell
+ * (sidebar, bottom navigation, ou telas futuras) — um único listener cobre
+ * todos, inclusive elementos injetados dinamicamente pelo router.
+ */
+function bindGlobalActions() {
+  document.addEventListener('click', async (event) => {
+    const trigger = event.target.closest('[data-action="logout"]');
+    if (!trigger) return;
+
+    try {
+      await logout();
+      showToast('Sessão encerrada.', 'info');
+    } catch (error) {
+      console.error('[app] Falha ao sair:', error);
+      showToast('Não foi possível sair. Tente novamente.', 'danger');
+    }
+  });
+}
+
+async function bootstrap() {
+  bindGlobalActions();
+  await initAuth(); // recupera a sessão existente (se houver) antes de rotear
+  initRouter();      // decide qual tela mostrar com base no estado de autenticação
+}
+
+bootstrap();
