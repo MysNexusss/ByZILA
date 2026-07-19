@@ -1,10 +1,82 @@
 /* ==========================================================================
    NEXORA FINANCIAL — PÁGINAS
-   Estilos de composição específicos de cada tela (dashboard, transações,
-   estatísticas, metas, dívidas, perfil). Reservado para a Fase 3 — nenhuma
-   tela existe ainda nesta fase.
-
-   Observação: a vitrine do Design System da Fase 1 foi descontinuada.
-   index.html agora representa o App Shell real da aplicação; cada
-   componente documenta seu próprio uso em components/<nome>/<nome>.html.
+   Estilos de composição específicos de cada tela. Nesta fase, contém o
+   layout de autenticação (Login e Cadastro) — as demais telas seguem
+   reservadas para uma fase futura.
    ========================================================================== */
+
+/* --------------------------------------------------------------------
+   Layout de autenticação (Login / Cadastro)
+   -------------------------------------------------------------------- */
+.auth-layout {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-6);
+  background-color: var(--color-offwhite);
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+}
+
+.auth-brand {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.auth-brand-name {
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: var(--weight-medium);
+  color: var(--color-graphite);
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  font-weight: var(--weight-regular);
+  color: var(--color-graphite);
+  margin-bottom: var(--space-2);
+}
+
+.auth-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-graphite-soft);
+  margin-bottom: var(--space-8);
+}
+
+.auth-footer {
+  margin-top: var(--space-6);
+  text-align: center;
+  font-size: var(--text-sm);
+  color: var(--color-graphite-soft);
+}
+
+.auth-footer a {
+  color: var(--color-gold-deep);
+  font-weight: var(--weight-medium);
+}
+
+/* --------------------------------------------------------------------
+   Quando uma rota pública (login/cadastro) está ativa, o App Shell
+   completo (header/sidebar/bottom-nav) fica oculto — ver router.js,
+   applyLayout(). A tela de autenticação ocupa a página inteira.
+   -------------------------------------------------------------------- */
+body.is-auth-layout .app-header,
+body.is-auth-layout .sidebar,
+body.is-auth-layout .bottom-nav {
+  display: none;
+}
+
+body.is-auth-layout .app-shell {
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
+  grid-template-areas: "main";
+}
+
+body.is-auth-layout .app-main {
+  padding: 0;
+}

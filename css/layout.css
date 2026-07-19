@@ -87,3 +87,12 @@
 .spacer-sm { height: var(--space-6); }
 .spacer-md { height: var(--space-12); }
 .spacer-lg { height: var(--space-24); }
+
+/* Estado de carregamento centralizado — usado por router.js enquanto uma
+   rota é buscada/renderizada. */
+.route-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40vh;
+}
