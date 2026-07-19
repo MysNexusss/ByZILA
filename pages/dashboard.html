@@ -1,0 +1,33 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Olá!</h1>
+    <p class="dashboard-subtitle">Aqui está o resumo das suas finanças.</p>
+  </div>
+
+  <div class="grid grid--4" id="dashboard-summary" aria-live="polite"></div>
+
+  <div class="grid grid--2 dashboard-secondary">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Últimas transações</div>
+      </div>
+      <div id="dashboard-transactions-body"></div>
+    </div>
+
+    <div class="stack" style="--stack-gap: var(--space-6);">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Metas em andamento</div>
+        </div>
+        <div id="dashboard-goals-body"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <div class="card-title">Dívidas em aberto</div>
+        </div>
+        <div id="dashboard-debts-body"></div>
+      </div>
+    </div>
+  </div>
+</div>
