@@ -3,16 +3,18 @@
  * ============================================================================
  * Comportamento do componente Sidebar (App Shell — desktop).
  *
- * Responsabilidades futuras:
- *  - Marcar o item de navegação ativo (aria-current="page") de acordo com
- *    a rota atual, em conjunto com router.js.
- *  - Lidar com o clique em "Sair" (data-action="logout"), delegando para
- *    services/auth.service.js.
+ * As duas responsabilidades originalmente previstas para este arquivo já
+ * são cobertas por outros módulos, implementados na Fase 5:
  *
- * Estrutura de referência (a implementar):
- *  - initSidebar(): liga os event listeners aos itens de navegação.
+ *  - Marcar o item ativo (aria-current="page") → feito por
+ *    js/router.js -> setActiveNavItem(), que atualiza sidebar e
+ *    bottom-navigation juntas a cada troca de rota.
+ *  - Clique em "Sair" (data-action="logout") → coberto pela delegação
+ *    global de eventos em js/app.js -> bindGlobalActions(), que escuta
+ *    [data-action="logout"] em qualquer lugar do documento.
  *
- * Status: 🚧 Não implementado — fase atual: App Shell (arquitetura).
- * Depende de: router.js, ui.js
+ * Este arquivo não precisa de código próprio: nenhuma responsabilidade
+ * ficou sem dono, ela só migrou para um local mais central — evitar duas
+ * fontes de verdade para a mesma lógica é intencional.
  * ============================================================================
  */
