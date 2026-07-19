@@ -22,6 +22,10 @@
   <link rel="stylesheet" href="components/header/header.css">
   <link rel="stylesheet" href="components/sidebar/sidebar.css">
   <link rel="stylesheet" href="components/bottom-navigation/bottom-navigation.css">
+  <link rel="stylesheet" href="components/input/input.css">
+  <link rel="stylesheet" href="components/toast/toast.css">
+  <link rel="stylesheet" href="components/loader/loader.css">
+  <link rel="stylesheet" href="components/empty-state/empty-state.css">
   <link rel="stylesheet" href="css/responsive.css">
 </head>
 <body>
@@ -92,7 +96,7 @@
     <!-- ===== ÁREA PRINCIPAL DE CONTEÚDO ===== -->
     <main class="app-main" id="app-main">
       <div id="route-outlet">
-        <!-- router.js renderizará a tela ativa aqui. Vazio nesta fase. -->
+        <div class="route-loading"><span class="loader loader--lg"></span></div>
       </div>
     </main>
 

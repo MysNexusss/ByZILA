@@ -4,9 +4,46 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 2 — App Shell e arquitetura base (services,
-> repositories, models, sistema de componentes). Nenhuma funcionalidade
-> (autenticação, dados, roteamento) foi implementada ainda.
+> **Status atual:** Fase 5 — Fluxo completo de autenticação (Login,
+> Cadastro, logout, recuperação de sessão e proteção de rotas). O
+> Dashboard ainda é um placeholder temporário — a tela real chega na
+> próxima fase.
+
+### Testando a autenticação
+
+Com as credenciais reais preenchidas em `js/config.js` e o schema/policies
+do banco já executados (ver seção anterior), sirva o projeto localmente e
+acesse `http://localhost:8080`:
+
+- Sem sessão salva → cai automaticamente em `#/login`
+- Cadastro em `#/register` → cria a conta no Supabase Auth
+- Login em `#/login` → redireciona sozinho para `#/dashboard` (placeholder)
+- Botão "Sair" na sidebar → encerra a sessão e volta para `#/login`
+- Recarregar a página autenticado → sessão é restaurada automaticamente
+
+### Configurando o banco de dados
+
+No **SQL Editor** do seu projeto Supabase, execute, nesta ordem:
+
+1. `sql/schema.sql` — cria os tipos, tabelas, índices e triggers
+2. `sql/policies.sql` — habilita RLS e cria as policies de acesso
+
+Depois de rodar os dois, as tabelas `profiles`, `categories`,
+`transactions`, `goals` e `debts` já existem e estão protegidas por RLS
+— um usuário autenticado só enxerga (e só grava) as próprias linhas.
+
+### Configurando o Supabase
+
+Antes de usar, edite `js/config.js` e substitua os valores de exemplo:
+
+```js
+export const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
+export const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_AQUI';
+```
+
+Ambos os valores ficam em Supabase Dashboard → Project Settings → API.
+Use sempre a chave **anon/public** — nunca a `service_role key` (essa
+nunca deve aparecer em código client-side).
 
 ---
 
@@ -129,7 +166,10 @@ Acesse `http://localhost:8080`.
 
 - [x] **Fase 1** — Estrutura do projeto e Design System
 - [x] **Fase 2** — App Shell, sistema de componentes, services/repositories/models
-- [ ] **Fase 3** — Schema do Supabase, autenticação, roteamento e telas
-- [ ] **Fase 4** — Funcionalidades core (transações, estatísticas, metas, dívidas, perfil)
-- [ ] **Fase 5** — PWA completa (manifest, service worker, ícones, offline)
-- [ ] **Fase 6** — Deploy e ajustes finais no GitHub Pages
+- [x] **Fase 3** — Infraestrutura Supabase (client, config, contrato de autenticação)
+- [x] **Fase 4** — Schema do banco de dados e Row Level Security
+- [x] **Fase 5** — Autenticação completa (login, cadastro, logout, sessão, rotas protegidas)
+- [ ] **Fase 6** — Dashboard real e repositories (transações, metas, dívidas, categorias)
+- [ ] **Fase 7** — Telas restantes (transações, estatísticas, metas, dívidas, perfil)
+- [ ] **Fase 8** — PWA completa (manifest, service worker, ícones, offline)
+- [ ] **Fase 9** — Deploy e ajustes finais no GitHub Pages
