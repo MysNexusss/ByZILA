@@ -1,12 +1,11 @@
 /**
- * transaction.repository.js
+ * debt.repository.js
  * ============================================================================
- * Camada de acesso a dados — consultas cruas à tabela "transactions" no
- * Supabase. Não contém regras de negócio (isso pertence a
- * services/transaction.service.js).
+ * Camada de acesso a dados — consultas cruas à tabela "debts" no Supabase.
+ * Não contém regras de negócio (isso pertence a services/debt.service.js).
  *
  * Responsabilidades futuras:
- *  - findAll(filtros)
+ *  - findAll()
  *  - findById(id)
  *  - insert(dados)
  *  - update(id, dados)

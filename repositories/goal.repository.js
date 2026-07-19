@@ -1,12 +1,11 @@
 /**
- * transaction.repository.js
+ * goal.repository.js
  * ============================================================================
- * Camada de acesso a dados — consultas cruas à tabela "transactions" no
- * Supabase. Não contém regras de negócio (isso pertence a
- * services/transaction.service.js).
+ * Camada de acesso a dados — consultas cruas à tabela "goals" no Supabase.
+ * Não contém regras de negócio (isso pertence a services/goal.service.js).
  *
  * Responsabilidades futuras:
- *  - findAll(filtros)
+ *  - findAll()
  *  - findById(id)
  *  - insert(dados)
  *  - update(id, dados)
