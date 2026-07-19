@@ -3,11 +3,12 @@
  * ============================================================================
  * Comportamento do componente Bottom Navigation (App Shell — mobile).
  *
- * Responsabilidades futuras:
- *  - Marcar o item ativo (aria-current="page") conforme a rota atual,
- *    espelhando o comportamento da sidebar.
+ * A responsabilidade originalmente prevista — marcar o item ativo
+ * (aria-current="page") conforme a rota atual — já é coberta por
+ * js/router.js -> setActiveNavItem(), que seleciona todos os elementos
+ * [data-route] do documento (sidebar e bottom-navigation juntas) a cada
+ * troca de rota.
  *
- * Status: 🚧 Não implementado — fase atual: App Shell (arquitetura).
- * Depende de: router.js
+ * Este arquivo não precisa de código próprio.
  * ============================================================================
  */
