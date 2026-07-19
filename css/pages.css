@@ -61,6 +61,84 @@
 }
 
 /* --------------------------------------------------------------------
+   Dashboard
+   -------------------------------------------------------------------- */
+.dashboard-header {
+  margin-bottom: var(--space-8);
+}
+
+.dashboard-title {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: var(--weight-light);
+  color: var(--color-graphite);
+  margin-bottom: var(--space-2);
+}
+
+.dashboard-subtitle {
+  font-size: var(--text-sm);
+  color: var(--color-graphite-soft);
+}
+
+.dashboard-secondary {
+  margin-top: var(--space-8);
+  align-items: start;
+}
+
+/* Item de lista reutilizado pelas seções de transações, metas e dívidas */
+.dashboard-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding-block: var(--space-3);
+  border-bottom: 1px solid var(--color-line-on-white);
+}
+
+.dashboard-list-item:last-child {
+  border-bottom: none;
+}
+
+.dashboard-list-item-main {
+  min-width: 0;
+}
+
+.dashboard-list-item-title {
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  color: var(--color-graphite);
+}
+
+.dashboard-list-item-meta {
+  font-size: var(--text-xs);
+  color: var(--color-graphite-faint);
+  margin-top: var(--space-1);
+}
+
+/* Variante usada pelas metas: título + meta + barra de progresso empilhados */
+.dashboard-list-item--stacked {
+  align-items: flex-start;
+}
+
+.dashboard-list-item--stacked .dashboard-list-item-main {
+  flex: 1;
+}
+
+.progress-bar {
+  height: 6px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-offwhite-deep);
+  overflow: hidden;
+  margin-top: var(--space-2);
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: var(--color-gold);
+  border-radius: var(--radius-full);
+}
+
+/* --------------------------------------------------------------------
    Quando uma rota pública (login/cadastro) está ativa, o App Shell
    completo (header/sidebar/bottom-nav) fica oculto — ver router.js,
    applyLayout(). A tela de autenticação ocupa a página inteira.
