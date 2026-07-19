@@ -1,1 +1,24 @@
-
+<!--
+  Componente: Modal
+  ------------------------------------------------------------------
+  Estrutura fixa, renderizada dentro de #modal-root (ver index.html).
+  Oculto por padrão; a classe .is-open (a ser aplicada por ui.js)
+  controlará a exibição.
+-->
+<div class="modal-overlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="modal-header">
+      <h2 class="modal-title" id="modal-title">Título do modal</h2>
+      <button class="modal-close" type="button" aria-label="Fechar" data-action="close-modal">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l10 10M14 4L4 14"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">
+      Conteúdo do modal.
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn--ghost" type="button" data-action="close-modal">Cancelar</button>
+      <button class="btn btn--primary" type="button">Confirmar</button>
+    </div>
+  </div>
+</div>
