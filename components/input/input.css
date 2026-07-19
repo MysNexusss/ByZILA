@@ -1,6 +1,10 @@
 /* ==========================================================================
    COMPONENTE — INPUT
    Estilo base definido em css/components.css (.field, .label, .input,
-   .input--error). Reservado para ajustes específicos deste módulo
-   (ex.: máscara visual de valores monetários no futuro).
+   .input--error). Aqui ficam o estado de erro textual (.hint--error)
+   usado pelas validações de formulário.
    ========================================================================== */
+
+.hint--error {
+  color: var(--color-danger);
+}
