@@ -1,16 +1,43 @@
 /**
  * config.js
  * ============================================================================
- * Configurações globais e constantes da aplicação.
+ * Configurações globais e constantes da aplicação Nexora Financial.
  *
- * Responsabilidades futuras:
- *  - Centralizar as credenciais públicas do Supabase (URL do projeto e
- *    chave "anon"). Como o projeto é 100% estático (GitHub Pages), não há
- *    segredos de servidor — apenas a chave pública, protegida por Row
- *    Level Security (RLS), definida em /sql.
- *  - Definir constantes gerais (nome da aplicação, versão, chaves de
- *    armazenamento local, etc.).
- *
- * Status: 🚧 Não implementado — fase atual: Design System.
+ * Como o projeto é 100% estático (hospedado no GitHub Pages), não existe
+ * servidor para guardar segredos — por isso, SOMENTE a chave pública
+ * "anon" do Supabase pode viver aqui. Ela é segura para expor no client
+ * porque toda a proteção real dos dados é feita por Row Level Security
+ * (RLS), configurado nas policies em /sql. NUNCA coloque a "service_role
+ * key" neste arquivo.
  * ============================================================================
  */
+
+/**
+ * URL do projeto Supabase.
+ * Encontrada em: Supabase Dashboard > Project Settings > API > Project URL
+ * @type {string}
+ */
+export const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
+
+/**
+ * Chave pública (anon/publishable) do Supabase.
+ * Encontrada em: Supabase Dashboard > Project Settings > API > anon public
+ * @type {string}
+ */
+export const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_AQUI';
+
+/**
+ * Configurações gerais da aplicação, sem relação com o Supabase.
+ * Centralizadas aqui para evitar valores "mágicos" espalhados pelo código.
+ */
+export const APP_CONFIG = {
+  name: 'Nexora Financial',
+  version: '0.3.0',
+
+  // Chaves usadas para persistir dados no localStorage/sessionStorage
+  // (uso futuro — nenhum módulo grava nelas ainda).
+  storageKeys: {
+    session: 'nexora_session',
+    theme: 'nexora_theme',
+  },
+};
