@@ -1,0 +1,89 @@
+/* ==========================================================================
+   NEXORA FINANCIAL — LAYOUT
+   Padrões estruturais reutilizáveis: container, grid de página, seções,
+   stacks e clusters. Não contém estilo visual (cor, sombra) — apenas
+   posicionamento e espaçamento.
+   ========================================================================== */
+
+/* Container centralizado, com largura máxima e respiro lateral */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-inline: auto;
+  padding-inline: var(--container-padding);
+}
+
+/* Seção de página — respiro vertical generoso ("muito espaço em branco") */
+.section {
+  padding-block: var(--space-24);
+}
+
+.section--tight {
+  padding-block: var(--space-12);
+}
+
+.section-header {
+  margin-bottom: var(--space-12);
+  max-width: 640px;
+}
+
+/* Estrutura futura do app autenticado: header fixo + sidebar + conteúdo */
+.app-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-width) 1fr;
+  grid-template-rows: var(--header-height) 1fr;
+  grid-template-areas:
+    "sidebar header"
+    "sidebar main";
+  min-height: 100dvh;
+}
+
+.app-header {
+  grid-area: header;
+}
+
+.app-sidebar {
+  grid-area: sidebar;
+}
+
+.app-main {
+  grid-area: main;
+  padding: var(--space-8);
+}
+
+/* Stack — empilha itens verticalmente com espaçamento consistente */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack > * + * {
+  margin-top: var(--stack-gap, var(--space-4));
+}
+
+/* Cluster — agrupa itens horizontalmente com quebra automática */
+.cluster {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--cluster-gap, var(--space-4));
+}
+
+.cluster--between {
+  justify-content: space-between;
+}
+
+/* Grid de cards — responsivo, refinado em responsive.css */
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid--2 { grid-template-columns: repeat(2, 1fr); }
+.grid--3 { grid-template-columns: repeat(3, 1fr); }
+.grid--4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Espaçadores verticais explícitos, para quando o contexto pede algo além do padrão */
+.spacer-sm { height: var(--space-6); }
+.spacer-md { height: var(--space-12); }
+.spacer-lg { height: var(--space-24); }

@@ -1,1 +1,149 @@
+/* ==========================================================================
+   NEXORA FINANCIAL — DESIGN TOKENS
+   Fonte única da verdade para cores, tipografia, espaçamento, raios,
+   sombras e transições. Nenhum valor de estilo deve ser "hardcoded"
+   em outros arquivos CSS — sempre referencie uma variável daqui.
+   ========================================================================== */
 
+:root {
+
+  /* --------------------------------------------------------------------
+     1. COR — Branco sofisticado, off-white, dourado elegante, grafite
+     -------------------------------------------------------------------- */
+
+  /* Neutros claros */
+  --color-white:          #FFFFFF; /* Branco sofisticado — superfícies elevadas (cards, modais) */
+  --color-offwhite:       #F7F5F0; /* Off-white — fundo principal da aplicação */
+  --color-offwhite-deep:  #EFEBE2; /* Off-white profundo — seções secundárias, hover sutil */
+
+  /* Grafite (texto e neutros escuros) */
+  --color-graphite:       #24242A; /* Grafite — títulos, texto primário */
+  --color-graphite-soft:  #5C5C63; /* Grafite suave — texto secundário */
+  --color-graphite-faint: #9B9BA1; /* Grafite tênue — placeholders, texto desabilitado */
+
+  /* Dourado elegante (acento) */
+  --color-gold:           #C7A667; /* Dourado — acento primário, CTAs, destaques */
+  --color-gold-deep:      #9C7C3E; /* Dourado profundo — hover/active de elementos dourados */
+  --color-gold-soft:      #F3E9D2; /* Dourado suave — fundos de badges e destaques leves */
+
+  /* Linhas e divisores */
+  --color-line:           #E7E2D8; /* Linha sobre off-white */
+  --color-line-on-white:  #ECE9E2; /* Linha sobre branco */
+
+  /* Estados semânticos (tons abafados, alinhados à sofisticação da paleta) */
+  --color-success:        #4C7A5B; /* Ganhos, saldo positivo */
+  --color-success-soft:   #E4EDE7;
+  --color-danger:         #B5504A; /* Dívidas, saldo negativo */
+  --color-danger-soft:    #F5E6E4;
+  --color-info:           #5B6B8C; /* Informativo */
+  --color-info-soft:      #E7EAF0;
+
+  /* --------------------------------------------------------------------
+     2. TIPOGRAFIA
+     -------------------------------------------------------------------- */
+
+  /* Famílias — carregadas via <link> no <head> (ver index.html) */
+  --font-display: 'Fraunces', 'Georgia', serif;               /* Títulos e números de destaque */
+  --font-body:    'Inter', -apple-system, sans-serif;          /* Texto de interface */
+  --font-mono:    'JetBrains Mono', 'Courier New', monospace;  /* Valores monetários e dados ("Ledger Numerals") */
+
+  /* Escala tipográfica */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-md:   1.125rem;  /* 18px */
+  --text-lg:   1.375rem;  /* 22px */
+  --text-xl:   1.75rem;   /* 28px */
+  --text-2xl:  2.25rem;   /* 36px */
+  --text-3xl:  3rem;      /* 48px */
+  --text-4xl:  4rem;      /* 64px */
+
+  /* Pesos */
+  --weight-light:    300;
+  --weight-regular:  400;
+  --weight-medium:   500;
+  --weight-semibold: 600;
+  --weight-bold:     700;
+
+  /* Altura de linha */
+  --leading-tight:  1.2;
+  --leading-normal: 1.5;
+  --leading-loose:  1.75;
+
+  /* Espaçamento entre letras */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-widest: 0.12em;
+
+  /* --------------------------------------------------------------------
+     3. ESPAÇAMENTO (escala base 4px)
+     -------------------------------------------------------------------- */
+  --space-1:  0.25rem;  /* 4px  */
+  --space-2:  0.5rem;   /* 8px  */
+  --space-3:  0.75rem;  /* 12px */
+  --space-4:  1rem;     /* 16px */
+  --space-5:  1.25rem;  /* 20px */
+  --space-6:  1.5rem;   /* 24px */
+  --space-8:  2rem;     /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+  --space-12: 3rem;     /* 48px */
+  --space-16: 4rem;     /* 64px */
+  --space-20: 5rem;     /* 80px */
+  --space-24: 6rem;     /* 96px */
+  --space-32: 8rem;     /* 128px */
+
+  /* --------------------------------------------------------------------
+     4. RAIOS DE BORDA
+     -------------------------------------------------------------------- */
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 999px;
+
+  /* --------------------------------------------------------------------
+     5. SOMBRAS (suaves, com tonalidade grafite — nunca preto puro)
+     -------------------------------------------------------------------- */
+  --shadow-sm:   0 1px 2px rgba(36, 36, 42, 0.04), 0 1px 1px rgba(36, 36, 42, 0.03);
+  --shadow-md:   0 4px 12px rgba(36, 36, 42, 0.06), 0 2px 4px rgba(36, 36, 42, 0.04);
+  --shadow-lg:   0 16px 32px rgba(36, 36, 42, 0.08), 0 4px 8px rgba(36, 36, 42, 0.04);
+  --shadow-xl:   0 24px 48px rgba(36, 36, 42, 0.10), 0 8px 16px rgba(36, 36, 42, 0.05);
+  --shadow-gold: 0 8px 24px rgba(199, 166, 103, 0.28); /* Glow dourado — hover em CTAs */
+
+  /* --------------------------------------------------------------------
+     6. TRANSIÇÕES
+     -------------------------------------------------------------------- */
+  --ease-standard:    cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-fast:  150ms var(--ease-standard);
+  --transition-base:  250ms var(--ease-standard);
+  --transition-slow:  400ms var(--ease-standard);
+
+  /* --------------------------------------------------------------------
+     7. LAYOUT
+     -------------------------------------------------------------------- */
+  --container-max:     1200px;
+  --container-padding:  var(--space-6);
+  --sidebar-width:     264px;
+  --header-height:     72px;
+  --bottom-nav-height: 64px;
+
+  /* --------------------------------------------------------------------
+     8. Z-INDEX
+     -------------------------------------------------------------------- */
+  --z-dropdown: 100;
+  --z-sticky:   200;
+  --z-overlay:  300;
+  --z-modal:    400;
+  --z-toast:    500;
+}
+
+/* --------------------------------------------------------------------
+   Breakpoints de referência (usados manualmente em responsive.css,
+   já que custom properties não funcionam dentro de @media):
+   mobile:  até 480px
+   tablet:  481px – 768px
+   laptop:  769px – 1024px
+   desktop: 1025px – 1280px
+   wide:    1281px+
+   -------------------------------------------------------------------- */

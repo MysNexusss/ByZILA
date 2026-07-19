@@ -1,0 +1,89 @@
+/* ==========================================================================
+   NEXORA FINANCIAL — RESPONSIVIDADE
+   Ajustes de layout e tipografia por breakpoint. Abordagem desktop-first,
+   já que os módulos financeiros (tabelas, dashboards) são naturalmente
+   mais densos e ricos em telas maiores.
+
+   Breakpoint estrutural do App Shell: 1024px — acima disso, Sidebar;
+   abaixo, Bottom Navigation (ver components/sidebar e
+   components/bottom-navigation).
+   ========================================================================== */
+
+/* Desktop grande / wide (>=1281px) — usa os valores padrão dos tokens */
+
+/* Desktop (até 1280px) */
+@media (max-width: 1280px) {
+  :root {
+    --container-padding: var(--space-8);
+  }
+}
+
+/* Laptop / tablet grande (até 1024px) — troca Sidebar por Bottom Navigation */
+@media (max-width: 1024px) {
+  .grid--4 { grid-template-columns: repeat(2, 1fr); }
+  .grid--3 { grid-template-columns: repeat(2, 1fr); }
+
+  .app-shell {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "main";
+  }
+
+  /* .sidebar já se esconde sozinha em components/sidebar/sidebar.css;
+     aqui garantimos espaço para a bottom-navigation não sobrepor o
+     conteúdo principal. */
+  .app-main {
+    padding-bottom: calc(var(--space-8) + var(--bottom-nav-height) + env(safe-area-inset-bottom));
+  }
+}
+
+/* Tablet (até 768px) */
+@media (max-width: 768px) {
+  :root {
+    --container-padding: var(--space-5);
+  }
+
+  .grid--2,
+  .grid--3,
+  .grid--4 {
+    grid-template-columns: 1fr;
+  }
+
+  .section {
+    padding-block: var(--space-16);
+  }
+
+  .card {
+    padding: var(--space-6);
+  }
+
+  .cluster {
+    gap: var(--space-3);
+  }
+
+  .app-main {
+    padding: var(--space-5);
+    padding-bottom: calc(var(--space-5) + var(--bottom-nav-height) + env(safe-area-inset-bottom));
+  }
+}
+
+/* Mobile (até 480px) */
+@media (max-width: 480px) {
+  :root {
+    --container-padding: var(--space-4);
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .card-header {
+    flex-direction: column;
+    gap: var(--space-3);
+  }
+
+  .table {
+    font-size: var(--text-xs);
+  }
+}
