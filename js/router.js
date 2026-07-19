@@ -14,10 +14,9 @@ const DEFAULT_PUBLIC_ROUTE = 'login';
 const DEFAULT_PRIVATE_ROUTE = 'dashboard';
 
 /**
- * Tabela de rotas. Rotas com "path" são fragmentos HTML buscados via
- * fetch(); rotas com "render" são geradas diretamente em JS — usado por
- * enquanto só pelo placeholder de dashboard, até uma fase futura
- * implementar a tela real.
+ * Tabela de rotas. "path" é o fragmento HTML buscado via fetch() e
+ * injetado em #route-outlet; "controller" é o módulo cujo init() é
+ * chamado logo em seguida, para dar comportamento a esse HTML.
  */
 const routes = {
   login: {
@@ -32,7 +31,8 @@ const routes = {
   },
   dashboard: {
     public: false,
-    render: renderDashboardPlaceholder,
+    path: 'pages/dashboard.html',
+    controller: () => import('../pages/dashboard.js'),
   },
 };
 
@@ -93,11 +93,6 @@ async function renderRoute() {
   outlet.innerHTML = '<div class="route-loading"><span class="loader loader--lg"></span></div>';
 
   try {
-    if (route.render) {
-      route.render(outlet);
-      return;
-    }
-
     const response = await fetch(route.path);
     if (!response.ok) throw new Error(`Não foi possível carregar ${route.path}`);
     outlet.innerHTML = await response.text();
@@ -113,21 +108,6 @@ async function renderRoute() {
       </div>
     `;
   }
-}
-
-/**
- * Placeholder temporário do Dashboard — a tela real será implementada em
- * uma fase futura. Existe apenas para o redirecionamento pós-login ter um
- * destino válido e para permitir testar o fluxo de logout.
- */
-function renderDashboardPlaceholder(outlet) {
-  outlet.innerHTML = `
-    <div class="empty-state">
-      <h2 class="empty-state-title">Você está autenticado</h2>
-      <p class="empty-state-desc">O Dashboard ainda será implementado em uma fase futura.</p>
-      <button class="btn btn--outline btn--sm" type="button" data-action="logout">Sair</button>
-    </div>
-  `;
 }
 
 /**
