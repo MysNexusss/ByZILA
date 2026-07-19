@@ -1,12 +1,25 @@
 /**
  * button.js
  * ============================================================================
- * Estrutura preparada para comportamento de botões reutilizáveis.
- *
- * Responsabilidades futuras:
- *  - bindLoadingState(button) — alternar o botão para estado de
- *    carregamento (integração futura com loader.js).
- *
- * Status: 🚧 Não implementado — fase atual: App Shell (arquitetura).
+ * Estado de carregamento reutilizável para botões (ex.: durante chamadas
+ * de autenticação ao Supabase).
  * ============================================================================
  */
+
+/**
+ * Alterna um botão para o estado de carregamento: desabilita o clique e
+ * troca o conteúdo por um loader, preservando o texto original para
+ * restaurar depois.
+ * @param {HTMLButtonElement} buttonEl
+ * @param {boolean} isLoading
+ */
+export function setButtonLoading(buttonEl, isLoading) {
+  if (isLoading) {
+    buttonEl.dataset.originalText = buttonEl.textContent;
+    buttonEl.disabled = true;
+    buttonEl.innerHTML = '<span class="loader loader--sm"></span>';
+  } else {
+    buttonEl.disabled = false;
+    buttonEl.textContent = buttonEl.dataset.originalText ?? buttonEl.textContent;
+  }
+}
