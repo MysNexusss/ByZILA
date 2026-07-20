@@ -158,6 +158,11 @@
   overflow-x: auto;
 }
 
+/* Barra de filtros genérica — usada por Transações e Estatísticas */
+.filters-bar {
+  margin-bottom: var(--space-6);
+}
+
 /* --------------------------------------------------------------------
    Quando uma rota pública (login/cadastro) está ativa, o App Shell
    completo (header/sidebar/bottom-nav) fica oculto — ver router.js,
