@@ -1,13 +1,11 @@
 /**
  * statistics.js
  * ============================================================================
- * Estatísticas e análises financeiras do usuário.
+ * A implementação real da tela de Estatísticas vive em pages/statistics.js
+ * + pages/statistics.html, seguindo o mesmo padrão de controlador de
+ * página usado por login, cadastro, dashboard e transações (ver router.js).
  *
- * Responsabilidades futuras:
- *  - Agregar dados de transactions.js para gerar gráficos e indicadores
- *    (gastos por categoria, evolução mensal, etc.).
- *
- * Status: 🚧 Não implementado — fase atual: Design System.
- * Depende de: supabase.js, transactions.js, ui.js
+ * Este arquivo fica reservado, sem código, para manter a organização
+ * original por domínio — nenhuma responsabilidade ficou pendente aqui.
  * ============================================================================
  */
