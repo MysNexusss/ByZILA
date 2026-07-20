@@ -4,10 +4,9 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 7 — CRUD completo de transações (criar, editar,
-> excluir, listar com filtros de mês/categoria/tipo e busca por
-> descrição). O Dashboard se atualiza sozinho ao ser revisitado, sem
-> mecanismo extra de sincronização.
+> **Status atual:** Fase 8 — Estatísticas com Chart.js (receitas x
+> despesas por mês, evolução do saldo, gastos e receitas por categoria)
+> e 5 indicadores. Chart.js só é baixado quando essa tela é aberta.
 
 ### Testando a autenticação
 
@@ -171,7 +170,8 @@ Acesse `http://localhost:8080`.
 - [x] **Fase 5** — Autenticação completa (login, cadastro, logout, sessão, rotas protegidas)
 - [x] **Fase 6** — Dashboard real (leitura de saldo, transações, metas e dívidas)
 - [x] **Fase 7** — CRUD completo de transações (criar, editar, excluir, filtrar, buscar)
-- [ ] **Fase 8** — Cadastro/edição de metas e dívidas
-- [ ] **Fase 9** — Estatísticas com gráficos e perfil do usuário
-- [ ] **Fase 10** — PWA completa (manifest, service worker, ícones, offline)
-- [ ] **Fase 11** — Deploy e ajustes finais no GitHub Pages
+- [x] **Fase 8** — Estatísticas com gráficos (Chart.js)
+- [ ] **Fase 9** — Cadastro/edição de metas e dívidas
+- [ ] **Fase 10** — Perfil do usuário
+- [ ] **Fase 11** — PWA completa (manifest, service worker, ícones, offline)
+- [ ] **Fase 12** — Deploy e ajustes finais no GitHub Pages
