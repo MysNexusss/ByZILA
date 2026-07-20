@@ -1,0 +1,69 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Estatísticas</h1>
+    <p class="dashboard-subtitle">Análise das suas finanças ao longo do tempo.</p>
+  </div>
+
+  <div class="card filters-bar">
+    <div class="cluster">
+      <div class="field">
+        <label class="label" for="stats-period">Período</label>
+        <select class="select" id="stats-period">
+          <option value="3m">Últimos 3 meses</option>
+          <option value="6m">Últimos 6 meses</option>
+          <option value="12m">Últimos 12 meses</option>
+          <option value="year">Este ano</option>
+          <option value="all">Tudo</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="stats-type">Tipo</label>
+        <select class="select" id="stats-type">
+          <option value="">Todos</option>
+          <option value="income">Receita</option>
+          <option value="expense">Despesa</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="stats-category">Categoria</label>
+        <select class="select" id="stats-category">
+          <option value="">Todas</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid--5" id="statistics-indicators" aria-live="polite"></div>
+
+  <div class="grid grid--2 dashboard-secondary">
+    <div class="card chart-card" id="chart-monthly">
+      <div class="card-header">
+        <div class="card-title">Receitas x despesas por mês</div>
+      </div>
+      <div class="chart-card-canvas"><canvas></canvas></div>
+    </div>
+
+    <div class="card chart-card" id="chart-balance">
+      <div class="card-header">
+        <div class="card-title">Evolução do saldo</div>
+      </div>
+      <div class="chart-card-canvas"><canvas></canvas></div>
+    </div>
+  </div>
+
+  <div class="grid grid--2 dashboard-secondary">
+    <div class="card chart-card" id="chart-expenses-category">
+      <div class="card-header">
+        <div class="card-title">Gastos por categoria</div>
+      </div>
+      <div class="chart-card-canvas"><canvas></canvas></div>
+    </div>
+
+    <div class="card chart-card" id="chart-income-category">
+      <div class="card-header">
+        <div class="card-title">Receitas por categoria</div>
+      </div>
+      <div class="chart-card-canvas"><canvas></canvas></div>
+    </div>
+  </div>
+</div>
