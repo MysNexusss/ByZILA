@@ -14,6 +14,11 @@
   width: 100%;
   aspect-ratio: 16 / 9;
   border-radius: var(--radius-md);
-  background: linear-gradient(180deg, var(--color-offwhite) 0%, var(--color-offwhite-deep) 100%);
   margin-top: var(--space-4);
+  position: relative;
+}
+
+.chart-card-canvas canvas {
+  width: 100% !important;
+  height: 100% !important;
 }

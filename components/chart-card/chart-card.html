@@ -1,9 +1,8 @@
 <!--
   Componente: Chart Card
   ------------------------------------------------------------------
-  Variante de card preparada para futuramente hospedar um gráfico
-  (estatísticas). Nenhuma biblioteca de gráficos foi adicionada nesta
-  fase — apenas o container estrutural.
+  Variante de card com um <canvas> para o Chart.js (ver
+  components/chart-card/chart-card.js -> renderChart()).
 -->
 <div class="card chart-card">
   <div class="card-header">
@@ -11,10 +10,8 @@
       <div class="card-title">Título do gráfico</div>
       <div class="card-subtitle">Período de referência</div>
     </div>
-    <select class="select chart-card-period" aria-label="Selecionar período">
-      <option>7 dias</option>
-      <option>30 dias</option>
-    </select>
   </div>
-  <div class="chart-card-canvas" aria-hidden="true"></div>
+  <div class="chart-card-canvas">
+    <canvas></canvas>
+  </div>
 </div>
