@@ -139,6 +139,26 @@
 }
 
 /* --------------------------------------------------------------------
+   Transações
+   -------------------------------------------------------------------- */
+.transactions-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-6);
+}
+
+.transactions-filters {
+  margin-bottom: var(--space-6);
+}
+
+.table-responsive {
+  overflow-x: auto;
+}
+
+/* --------------------------------------------------------------------
    Quando uma rota pública (login/cadastro) está ativa, o App Shell
    completo (header/sidebar/bottom-nav) fica oculto — ver router.js,
    applyLayout(). A tela de autenticação ocupa a página inteira.
