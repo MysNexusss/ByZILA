@@ -3,12 +3,18 @@
  * ============================================================================
  * Regras de negócio relacionadas a categorias de transações.
  *
- * Responsabilidades futuras:
- *  - listarCategorias()
- *  - criarCategoria(dados)
- *  - validarCategoriaUnica(nome)
- *
- * Status: 🚧 Não implementado — fase atual: App Shell (arquitetura).
- * Depende de: repositories/category.repository.js, models/category.model.js
+ * Nesta fase, apenas a listagem usada para popular o formulário e os
+ * filtros de transações. CRUD completo fica para uma fase futura.
  * ============================================================================
  */
+
+import * as categoryRepository from '../repositories/category.repository.js';
+
+/**
+ * Retorna as categorias do usuário, opcionalmente filtradas por tipo.
+ * @param {'income'|'expense'} [type]
+ */
+export async function list(type) {
+  const categories = await categoryRepository.findAll();
+  return type ? categories.filter((c) => c.type === type) : categories;
+}
