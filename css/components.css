@@ -213,6 +213,11 @@
   color: var(--color-graphite-soft);
 }
 
+.badge--info {
+  background-color: var(--color-info-soft);
+  color: var(--color-info);
+}
+
 /* --------------------------------------------------------------------
    FORMULÁRIOS
    -------------------------------------------------------------------- */
