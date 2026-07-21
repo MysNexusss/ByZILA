@@ -1,0 +1,110 @@
+<div class="dashboard">
+  <div class="transactions-header">
+    <div>
+      <h1 class="dashboard-title">Metas</h1>
+      <p class="dashboard-subtitle">Acompanhe o progresso das suas metas financeiras.</p>
+    </div>
+    <button class="btn btn--primary" type="button" id="add-goal-btn">+ Nova meta</button>
+  </div>
+
+  <div class="card filters-bar">
+    <div class="cluster">
+      <div class="field">
+        <label class="label" for="filter-status">Status</label>
+        <select class="select" id="filter-status">
+          <option value="">Todas</option>
+          <option value="active">Ativas</option>
+          <option value="completed">Concluídas</option>
+          <option value="overdue">Vencidas</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="sort-goals">Ordenar por</label>
+        <select class="select" id="sort-goals">
+          <option value="deadline">Data limite</option>
+          <option value="progress">Maior progresso</option>
+          <option value="name">Nome</option>
+        </select>
+      </div>
+      <div class="field" style="flex: 1; min-width: 200px;">
+        <label class="label" for="filter-search">Buscar</label>
+        <input class="input" type="text" id="filter-search" placeholder="Nome da meta...">
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid--3" id="goals-list" aria-live="polite"></div>
+</div>
+
+<!-- Modal de criar/editar meta -->
+<div class="modal-overlay" id="goal-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="goal-modal-title">
+    <div class="modal-header">
+      <h2 class="modal-title" id="goal-modal-title">Nova meta</h2>
+      <button class="modal-close" type="button" aria-label="Fechar" data-action="close-modal">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l10 10M14 4L4 14"/></svg>
+      </button>
+    </div>
+
+    <form id="goal-form" novalidate>
+      <input type="hidden" id="goal-id">
+      <div class="stack" style="--stack-gap: var(--space-5);">
+        <div class="field">
+          <label class="label" for="goal-title">Nome da meta</label>
+          <input class="input" type="text" id="goal-title" placeholder="Ex.: Viagem para o Japão" required>
+          <span class="hint hint--error" data-error-for="goal-title" hidden></span>
+        </div>
+
+        <div class="cluster" style="align-items: flex-start;">
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="goal-target">Valor objetivo</label>
+            <input class="input" type="number" id="goal-target" min="0.01" step="0.01" placeholder="0,00" required>
+            <span class="hint hint--error" data-error-for="goal-target" hidden></span>
+          </div>
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="goal-current">Valor atual</label>
+            <input class="input" type="number" id="goal-current" min="0" step="0.01" placeholder="0,00">
+          </div>
+        </div>
+
+        <div class="cluster" style="align-items: flex-start;">
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="goal-deadline">Data limite</label>
+            <input class="input" type="date" id="goal-deadline">
+          </div>
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="goal-category">Categoria</label>
+            <select class="select" id="goal-category"></select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="goal-description">Descrição</label>
+          <textarea class="textarea" id="goal-description" placeholder="Detalhes sobre a meta (opcional)"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn--ghost" type="button" data-action="close-modal">Cancelar</button>
+        <button class="btn btn--primary" type="submit" id="goal-submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="modal-overlay" id="delete-goal-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="delete-goal-modal-title" style="max-width: 400px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="delete-goal-modal-title">Excluir meta</h2>
+      <button class="modal-close" type="button" aria-label="Fechar" data-action="close-modal">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l10 10M14 4L4 14"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">Tem certeza que deseja excluir esta meta? Essa ação não pode ser desfeita.</div>
+    <div class="modal-footer">
+      <button class="btn btn--ghost" type="button" data-action="close-modal">Cancelar</button>
+      <button class="btn btn--danger" type="button" id="confirm-delete-goal-btn">Excluir</button>
+    </div>
+  </div>
+</div>
