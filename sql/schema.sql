@@ -92,6 +92,8 @@ create table public.goals (
   target_amount   numeric(14,2) not null,
   current_amount  numeric(14,2) not null default 0,
   deadline        date,
+  category        text,
+  description     text,
   created_at      timestamptz not null default now(),
   updated_at      timestamptz not null default now(),
 
