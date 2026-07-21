@@ -111,18 +111,26 @@ create table public.debts (
   id                  uuid primary key default gen_random_uuid(),
   user_id             uuid not null references auth.users(id) on delete cascade,
   title               text not null,
+  type                text,
+  creditor            text,
   total_amount        numeric(14,2) not null,
-  installments_total  integer not null default 1,
-  installments_paid   integer not null default 0,
+  paid_amount         numeric(14,2) not null default 0,
+  installments_total  integer,
+  installments_paid   integer,
   interest_rate       numeric(6,3) not null default 0,
   due_date            date,
+  notes               text,
   created_at          timestamptz not null default now(),
   updated_at          timestamptz not null default now(),
 
   constraint debts_title_not_empty check (char_length(trim(title)) > 0),
   constraint debts_total_amount_positive check (total_amount > 0),
-  constraint debts_installments_total_positive check (installments_total > 0),
-  constraint debts_installments_paid_range check (installments_paid >= 0 and installments_paid <= installments_total),
+  constraint debts_paid_amount_non_negative check (paid_amount >= 0),
+  constraint debts_installments_total_positive check (installments_total is null or installments_total > 0),
+  constraint debts_installments_paid_range check (
+    installments_paid is null or installments_total is null
+    or (installments_paid >= 0 and installments_paid <= installments_total)
+  ),
   constraint debts_interest_rate_non_negative check (interest_rate >= 0)
 );
 
