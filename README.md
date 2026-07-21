@@ -4,9 +4,10 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 8 — Estatísticas com Chart.js (receitas x
-> despesas por mês, evolução do saldo, gastos e receitas por categoria)
-> e 5 indicadores. Chart.js só é baixado quando essa tela é aberta.
+> **Status atual:** Fase 9 — CRUD completo de metas financeiras, com
+> status (ativa/concluída/vencida), progresso e dias restantes
+> calculados automaticamente. **Requer rodar `sql/goals_fields.sql`
+> no Supabase** (adiciona `category` e `description` à tabela `goals`).
 
 ### Testando a autenticação
 
@@ -26,6 +27,9 @@ No **SQL Editor** do seu projeto Supabase, execute, nesta ordem:
 
 1. `sql/schema.sql` — cria os tipos, tabelas, índices e triggers
 2. `sql/policies.sql` — habilita RLS e cria as policies de acesso
+3. `sql/goals_fields.sql` — **(Fase 9)** adiciona `category` e `description`
+   à tabela `goals`. Só precisa rodar se seu banco já existia antes desta
+   fase; quem monta o banco do zero já recebe isso em `schema.sql`.
 
 Depois de rodar os dois, as tabelas `profiles`, `categories`,
 `transactions`, `goals` e `debts` já existem e estão protegidas por RLS
@@ -171,7 +175,8 @@ Acesse `http://localhost:8080`.
 - [x] **Fase 6** — Dashboard real (leitura de saldo, transações, metas e dívidas)
 - [x] **Fase 7** — CRUD completo de transações (criar, editar, excluir, filtrar, buscar)
 - [x] **Fase 8** — Estatísticas com gráficos (Chart.js)
-- [ ] **Fase 9** — Cadastro/edição de metas e dívidas
-- [ ] **Fase 10** — Perfil do usuário
-- [ ] **Fase 11** — PWA completa (manifest, service worker, ícones, offline)
-- [ ] **Fase 12** — Deploy e ajustes finais no GitHub Pages
+- [x] **Fase 9** — CRUD completo de metas financeiras
+- [ ] **Fase 10** — Cadastro/edição de dívidas
+- [ ] **Fase 11** — Perfil do usuário
+- [ ] **Fase 12** — PWA completa (manifest, service worker, ícones, offline)
+- [ ] **Fase 13** — Deploy e ajustes finais no GitHub Pages
