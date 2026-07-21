@@ -1,13 +1,11 @@
 /**
  * debts.js
  * ============================================================================
- * Gestão de dívidas e parcelamentos.
+ * A implementação real da tela de Dívidas vive em pages/debts.js +
+ * pages/debts.html, seguindo o mesmo padrão de controlador de página
+ * usado pelas demais telas (ver router.js).
  *
- * Responsabilidades futuras:
- *  - CRUD de dívidas via Supabase.
- *  - Acompanhamento de parcelas, juros e datas de vencimento.
- *
- * Status: 🚧 Não implementado — fase atual: Design System.
- * Depende de: supabase.js, ui.js, utils.js
+ * Este arquivo fica reservado, sem código, para manter a organização
+ * original por domínio — nenhuma responsabilidade ficou pendente aqui.
  * ============================================================================
  */

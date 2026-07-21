@@ -49,6 +49,11 @@ const routes = {
     path: 'pages/goals.html',
     controller: () => import('../pages/goals.js'),
   },
+  debts: {
+    public: false,
+    path: 'pages/debts.html',
+    controller: () => import('../pages/debts.js'),
+  },
 };
 
 function getRouteOutlet() {
