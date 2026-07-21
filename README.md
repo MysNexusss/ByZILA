@@ -4,10 +4,10 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 9 — CRUD completo de metas financeiras, com
-> status (ativa/concluída/vencida), progresso e dias restantes
-> calculados automaticamente. **Requer rodar `sql/goals_fields.sql`
-> no Supabase** (adiciona `category` e `description` à tabela `goals`).
+> **Status atual:** Fase 10 — CRUD completo de dívidas, com status
+> (aberta/atrasada/quitada), progresso e "vence em breve" calculados
+> automaticamente. **Requer rodar `sql/debts_fields.sql` no Supabase**
+> (adiciona `type`, `creditor`, `paid_amount`, `notes` à tabela `debts`).
 
 ### Testando a autenticação
 
@@ -30,6 +30,9 @@ No **SQL Editor** do seu projeto Supabase, execute, nesta ordem:
 3. `sql/goals_fields.sql` — **(Fase 9)** adiciona `category` e `description`
    à tabela `goals`. Só precisa rodar se seu banco já existia antes desta
    fase; quem monta o banco do zero já recebe isso em `schema.sql`.
+4. `sql/debts_fields.sql` — **(Fase 10)** adiciona `type`, `creditor`,
+   `paid_amount` e `notes` à tabela `debts`. Mesma regra: só necessário
+   em bancos que já existiam antes desta fase.
 
 Depois de rodar os dois, as tabelas `profiles`, `categories`,
 `transactions`, `goals` e `debts` já existem e estão protegidas por RLS
@@ -176,7 +179,7 @@ Acesse `http://localhost:8080`.
 - [x] **Fase 7** — CRUD completo de transações (criar, editar, excluir, filtrar, buscar)
 - [x] **Fase 8** — Estatísticas com gráficos (Chart.js)
 - [x] **Fase 9** — CRUD completo de metas financeiras
-- [ ] **Fase 10** — Cadastro/edição de dívidas
+- [x] **Fase 10** — CRUD completo de dívidas
 - [ ] **Fase 11** — Perfil do usuário
 - [ ] **Fase 12** — PWA completa (manifest, service worker, ícones, offline)
 - [ ] **Fase 13** — Deploy e ajustes finais no GitHub Pages
