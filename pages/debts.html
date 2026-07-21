@@ -1,0 +1,140 @@
+<div class="dashboard">
+  <div class="transactions-header">
+    <div>
+      <h1 class="dashboard-title">Dívidas</h1>
+      <p class="dashboard-subtitle">Acompanhe suas dívidas e pagamentos.</p>
+    </div>
+    <button class="btn btn--primary" type="button" id="add-debt-btn">+ Nova dívida</button>
+  </div>
+
+  <div class="grid grid--4" id="debts-summary" aria-live="polite"></div>
+
+  <div class="card filters-bar">
+    <div class="cluster">
+      <div class="field">
+        <label class="label" for="filter-debt-status">Status</label>
+        <select class="select" id="filter-debt-status">
+          <option value="">Todas</option>
+          <option value="open">Em aberto</option>
+          <option value="overdue">Em atraso</option>
+          <option value="paid">Quitadas</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="filter-debt-type">Tipo</label>
+        <select class="select" id="filter-debt-type">
+          <option value="">Todos</option>
+        </select>
+      </div>
+      <div class="field">
+        <label class="label" for="sort-debts">Ordenar por</label>
+        <select class="select" id="sort-debts">
+          <option value="due_date">Vencimento</option>
+          <option value="amount">Valor</option>
+          <option value="status">Status</option>
+        </select>
+      </div>
+      <div class="field" style="flex: 1; min-width: 200px;">
+        <label class="label" for="filter-debt-search">Buscar</label>
+        <input class="input" type="text" id="filter-debt-search" placeholder="Nome ou credor...">
+      </div>
+    </div>
+  </div>
+
+  <div class="grid grid--3" id="debts-list" aria-live="polite"></div>
+</div>
+
+<!-- Modal de criar/editar dívida -->
+<div class="modal-overlay" id="debt-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="debt-modal-title">
+    <div class="modal-header">
+      <h2 class="modal-title" id="debt-modal-title">Nova dívida</h2>
+      <button class="modal-close" type="button" aria-label="Fechar" data-action="close-modal">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l10 10M14 4L4 14"/></svg>
+      </button>
+    </div>
+
+    <form id="debt-form" novalidate>
+      <input type="hidden" id="debt-id">
+      <div class="stack" style="--stack-gap: var(--space-5);">
+        <div class="field">
+          <label class="label" for="debt-title">Nome da dívida</label>
+          <input class="input" type="text" id="debt-title" placeholder="Ex.: Financiamento do carro" required>
+          <span class="hint hint--error" data-error-for="debt-title" hidden></span>
+        </div>
+
+        <div class="cluster" style="align-items: flex-start;">
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-type">Tipo</label>
+            <select class="select" id="debt-type"></select>
+          </div>
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-creditor">Credor</label>
+            <input class="input" type="text" id="debt-creditor" placeholder="Ex.: Banco XYZ">
+          </div>
+        </div>
+
+        <div class="cluster" style="align-items: flex-start;">
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-total">Valor total</label>
+            <input class="input" type="number" id="debt-total" min="0.01" step="0.01" placeholder="0,00" required>
+            <span class="hint hint--error" data-error-for="debt-total" hidden></span>
+          </div>
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-paid">Valor pago</label>
+            <input class="input" type="number" id="debt-paid" min="0" step="0.01" placeholder="0,00">
+          </div>
+        </div>
+
+        <div class="cluster" style="align-items: flex-start;">
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-interest">Taxa de juros (% a.m.)</label>
+            <input class="input" type="number" id="debt-interest" min="0" step="0.01" placeholder="0,00">
+          </div>
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-due-date">Data de vencimento</label>
+            <input class="input" type="date" id="debt-due-date">
+          </div>
+        </div>
+
+        <div class="cluster" style="align-items: flex-start;">
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-installments-total">Número de parcelas (opcional)</label>
+            <input class="input" type="number" id="debt-installments-total" min="1" step="1" placeholder="Ex.: 24">
+          </div>
+          <div class="field" style="flex: 1; min-width: 140px;">
+            <label class="label" for="debt-installments-paid">Parcela atual (opcional)</label>
+            <input class="input" type="number" id="debt-installments-paid" min="0" step="1" placeholder="Ex.: 5">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label" for="debt-notes">Observações</label>
+          <textarea class="textarea" id="debt-notes" placeholder="Detalhes adicionais (opcional)"></textarea>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn--ghost" type="button" data-action="close-modal">Cancelar</button>
+        <button class="btn btn--primary" type="submit" id="debt-submit">Salvar</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Modal de confirmação de exclusão -->
+<div class="modal-overlay" id="delete-debt-modal">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="delete-debt-modal-title" style="max-width: 400px;">
+    <div class="modal-header">
+      <h2 class="modal-title" id="delete-debt-modal-title">Excluir dívida</h2>
+      <button class="modal-close" type="button" aria-label="Fechar" data-action="close-modal">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M4 4l10 10M14 4L4 14"/></svg>
+      </button>
+    </div>
+    <div class="modal-body">Tem certeza que deseja excluir esta dívida? Essa ação não pode ser desfeita.</div>
+    <div class="modal-footer">
+      <button class="btn btn--ghost" type="button" data-action="close-modal">Cancelar</button>
+      <button class="btn btn--danger" type="button" id="confirm-delete-debt-btn">Excluir</button>
+    </div>
+  </div>
+</div>
