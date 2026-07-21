@@ -1,13 +1,11 @@
 /**
  * goals.js
  * ============================================================================
- * Metas financeiras do usuário (ex.: reserva de emergência, viagem).
+ * A implementação real da tela de Metas vive em pages/goals.js +
+ * pages/goals.html, seguindo o mesmo padrão de controlador de página
+ * usado pelas demais telas (ver router.js).
  *
- * Responsabilidades futuras:
- *  - CRUD de metas via Supabase.
- *  - Cálculo e exibição de progresso.
- *
- * Status: 🚧 Não implementado — fase atual: Design System.
- * Depende de: supabase.js, ui.js, utils.js
+ * Este arquivo fica reservado, sem código, para manter a organização
+ * original por domínio — nenhuma responsabilidade ficou pendente aqui.
  * ============================================================================
  */
