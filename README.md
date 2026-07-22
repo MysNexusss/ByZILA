@@ -4,10 +4,11 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 10 — CRUD completo de dívidas, com status
-> (aberta/atrasada/quitada), progresso e "vence em breve" calculados
-> automaticamente. **Requer rodar `sql/debts_fields.sql` no Supabase**
-> (adiciona `type`, `creditor`, `paid_amount`, `notes` à tabela `debts`).
+> **Status atual:** Fase 11 — Perfil completo: dados pessoais, upload de
+> avatar (Supabase Storage), troca de senha, e tema claro/escuro/sistema
+> persistido no banco. **Requer rodar `sql/profile_fields.sql` no
+> Supabase** (novos campos + bucket de Storage). E-mail é somente leitura
+> nesta fase.
 
 ### Testando a autenticação
 
@@ -33,6 +34,10 @@ No **SQL Editor** do seu projeto Supabase, execute, nesta ordem:
 4. `sql/debts_fields.sql` — **(Fase 10)** adiciona `type`, `creditor`,
    `paid_amount` e `notes` à tabela `debts`. Mesma regra: só necessário
    em bancos que já existiam antes desta fase.
+5. `sql/profile_fields.sql` — **(Fase 11)** adiciona `phone`, `language`
+   e `theme` à tabela `profiles`, e cria o bucket `avatars` do Storage
+   com suas policies. Necessário mesmo em bancos recém-criados, já que
+   o bucket não é criado por `schema.sql`.
 
 Depois de rodar os dois, as tabelas `profiles`, `categories`,
 `transactions`, `goals` e `debts` já existem e estão protegidas por RLS
@@ -180,6 +185,6 @@ Acesse `http://localhost:8080`.
 - [x] **Fase 8** — Estatísticas com gráficos (Chart.js)
 - [x] **Fase 9** — CRUD completo de metas financeiras
 - [x] **Fase 10** — CRUD completo de dívidas
-- [ ] **Fase 11** — Perfil do usuário
+- [x] **Fase 11** — Perfil (dados, avatar, senha, tema claro/escuro/sistema)
 - [ ] **Fase 12** — PWA completa (manifest, service worker, ícones, offline)
 - [ ] **Fase 13** — Deploy e ajustes finais no GitHub Pages
