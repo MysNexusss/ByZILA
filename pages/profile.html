@@ -1,0 +1,38 @@
+<div class="dashboard">
+  <div class="dashboard-header">
+    <h1 class="dashboard-title">Perfil</h1>
+    <p class="dashboard-subtitle">Gerencie suas informações e preferências.</p>
+  </div>
+
+  <div class="grid grid--2 dashboard-secondary" style="margin-top: 0;">
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Informações pessoais</div>
+      </div>
+      <div id="profile-info-body"></div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-title">Segurança</div>
+      </div>
+      <p class="card-subtitle" style="margin-bottom: var(--space-6);">Altere sua senha de acesso.</p>
+
+      <form id="password-form" novalidate>
+        <div class="stack" style="--stack-gap: var(--space-5);">
+          <div class="field">
+            <label class="label" for="password-new">Nova senha</label>
+            <input class="input" type="password" id="password-new" placeholder="Mínimo de 6 caracteres" autocomplete="new-password">
+            <span class="hint hint--error" data-error-for="password-new" hidden></span>
+          </div>
+          <div class="field">
+            <label class="label" for="password-confirm">Confirmar nova senha</label>
+            <input class="input" type="password" id="password-confirm" placeholder="Repita a senha" autocomplete="new-password">
+            <span class="hint hint--error" data-error-for="password-confirm" hidden></span>
+          </div>
+          <button class="btn btn--outline" type="submit" id="password-submit">Alterar senha</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
