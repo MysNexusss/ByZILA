@@ -83,3 +83,13 @@ export function onAuthStateChange(callback) {
   const { data } = supabase.auth.onAuthStateChange(callback);
   return data.subscription;
 }
+
+/**
+ * Atualiza a senha do usuário autenticado.
+ * @param {string} newPassword
+ * @returns {Promise<{ user: object }>}
+ */
+export async function updatePassword(newPassword) {
+  ensureClient();
+  return handleResponse(await supabase.auth.updateUser({ password: newPassword }));
+}
