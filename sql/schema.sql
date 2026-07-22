@@ -38,9 +38,14 @@ create table public.profiles (
   id          uuid primary key references auth.users(id) on delete cascade,
   full_name   text,
   avatar_url  text,
+  phone       text,
   currency    text not null default 'BRL',
+  language    text not null default 'pt-BR',
+  theme       text not null default 'system',
   created_at  timestamptz not null default now(),
-  updated_at  timestamptz not null default now()
+  updated_at  timestamptz not null default now(),
+
+  constraint profiles_theme_valid check (theme in ('light', 'dark', 'system'))
 );
 
 comment on table public.profiles is 'Dados públicos do usuário, espelhando auth.users.';
