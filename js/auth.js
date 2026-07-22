@@ -105,3 +105,11 @@ export async function register(email, password) {
 export async function logout() {
   await authService.signOut();
 }
+
+/**
+ * Altera a senha do usuário autenticado.
+ * @param {string} newPassword
+ */
+export async function changePassword(newPassword) {
+  return authService.updatePassword(newPassword);
+}

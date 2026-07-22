@@ -44,4 +44,50 @@ export function escapeHtml(value) {
   return div.innerHTML;
 }
 
-// TODO (fase futura): validações genéricas, debounce/throttle.
+/* --------------------------------------------------------------------
+   Tema (claro/escuro/sistema)
+   -------------------------------------------------------------------- */
+
+const THEME_STORAGE_KEY = 'nexora_theme'; // igual a APP_CONFIG.storageKeys.theme
+
+/**
+ * Resolve a preferência salva ("light" | "dark" | "system") para um
+ * valor concreto de aplicação ("light" | "dark"), consultando a
+ * preferência do sistema operacional quando necessário.
+ * @param {string} preference
+ * @returns {'light'|'dark'}
+ */
+export function resolveTheme(preference) {
+  if (preference === 'dark' || preference === 'light') return preference;
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
+/**
+ * Aplica o tema no documento (via atributo data-theme em <html>, usado
+ * pelos overrides em css/variables.css) e persiste a preferência em
+ * localStorage, para leitura rápida e síncrona no próximo carregamento
+ * (ver o <script> inline em index.html).
+ * @param {string} preference - "light" | "dark" | "system"
+ */
+export function applyTheme(preference) {
+  document.documentElement.dataset.theme = resolveTheme(preference);
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, preference);
+  } catch {
+    // localStorage indisponível (modo privado, etc.) — o tema ainda
+    // funciona na sessão atual, só não persiste entre recarregamentos.
+  }
+}
+
+/**
+ * Lê a preferência de tema salva localmente. Usado no boot do app, antes
+ * do perfil (que vem do Supabase) estar disponível.
+ * @returns {string}
+ */
+export function getStoredThemePreference() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY) || 'system';
+  } catch {
+    return 'system';
+  }
+}
