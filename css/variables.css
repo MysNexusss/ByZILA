@@ -147,3 +147,40 @@
    desktop: 1025px – 1280px
    wide:    1281px+
    -------------------------------------------------------------------- */
+
+/* ==========================================================================
+   TEMA ESCURO
+   Ativado via atributo data-theme="dark" em <html> (ver js/utils.js ->
+   applyTheme, e o <script> inline em index.html que evita flash no
+   primeiro carregamento). Mesma estrutura de tokens do :root, com os
+   papéis de claro/escuro invertidos — o dourado permanece o acento em
+   ambos os temas.
+   ========================================================================== */
+[data-theme="dark"] {
+  --color-white:          #26262C;
+  --color-offwhite:       #18181C;
+  --color-offwhite-deep:  #201F24;
+
+  --color-graphite:       #F1EFEA;
+  --color-graphite-soft:  #ADA9A3;
+  --color-graphite-faint: #6E6B67;
+
+  --color-gold:           #D8B87C;
+  --color-gold-deep:      #C7A667;
+  --color-gold-soft:      #3A311F;
+
+  --color-line:           #313037;
+  --color-line-on-white:  #35343B;
+
+  --color-success:        #74B389;
+  --color-success-soft:   #1D2B22;
+  --color-danger:         #D97F79;
+  --color-danger-soft:    #331F1D;
+  --color-info:           #8B9CC4;
+  --color-info-soft:      #20242F;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.24), 0 1px 1px rgba(0, 0, 0, 0.18);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.32), 0 2px 4px rgba(0, 0, 0, 0.20);
+  --shadow-lg: 0 16px 32px rgba(0, 0, 0, 0.40), 0 4px 8px rgba(0, 0, 0, 0.24);
+  --shadow-xl: 0 24px 48px rgba(0, 0, 0, 0.48), 0 8px 16px rgba(0, 0, 0, 0.28);
+}

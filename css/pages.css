@@ -238,6 +238,24 @@
 }
 
 /* --------------------------------------------------------------------
+   Perfil
+   -------------------------------------------------------------------- */
+.profile-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.profile-avatar-preview {
+  width: 72px;
+  height: 72px;
+  font-size: var(--text-lg);
+  flex-shrink: 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* --------------------------------------------------------------------
    Quando uma rota pública (login/cadastro) está ativa, o App Shell
    completo (header/sidebar/bottom-nav) fica oculto — ver router.js,
    applyLayout(). A tela de autenticação ocupa a página inteira.
