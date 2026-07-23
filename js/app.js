@@ -1,13 +1,14 @@
 /**
  * app.js
  * ============================================================================
- * Ponto de entrada da aplicação Nexora Financial.
+ * Ponto de entrada da aplicação ByZIFA.
  * ============================================================================
  */
 
 import { initAuth, logout } from './auth.js';
 import { initProfile } from './profile.js';
 import { initRouter } from './router.js';
+import { initPWA } from './pwa.js';
 import { applyTheme, getStoredThemePreference } from './utils.js';
 import { initHeader } from '../components/header/header.js';
 import { showToast } from '../components/toast/toast.js';
@@ -49,6 +50,7 @@ async function bootstrap() {
   applyTheme(getStoredThemePreference()); // evita flash de tema errado (ver também o <script> inline em index.html)
   bindSystemThemeListener();
   bindGlobalActions();
+  initPWA(); // registra o Service Worker, o prompt de instalação e o aviso de offline
 
   await initAuth();    // recupera a sessão existente (se houver) antes de rotear
   await initProfile();  // carrega o perfil (se autenticado) e passa a reagir a mudanças de sessão

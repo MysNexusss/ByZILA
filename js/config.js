@@ -1,7 +1,7 @@
 /**
  * config.js
  * ============================================================================
- * Configurações globais e constantes da aplicação Nexora Financial.
+ * Configurações globais e constantes da aplicação ByZIFA.
  *
  * Como o projeto é 100% estático (hospedado no GitHub Pages), não existe
  * servidor para guardar segredos — por isso, SOMENTE a chave pública
@@ -17,21 +17,21 @@
  * Encontrada em: Supabase Dashboard > Project Settings > API > Project URL
  * @type {string}
  */
-export const SUPABASE_URL = 'https://eywnprmdysfspbbkicfv.supabase.co';
+export const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
 
 /**
  * Chave pública (anon/publishable) do Supabase.
  * Encontrada em: Supabase Dashboard > Project Settings > API > anon public
  * @type {string}
  */
-export const SUPABASE_ANON_KEY = 'sb_publishable_kHwLL5rzJqAlNmveDA0Lsg_7x1jZmWe';
+export const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_AQUI';
 
 /**
  * Configurações gerais da aplicação, sem relação com o Supabase.
  * Centralizadas aqui para evitar valores "mágicos" espalhados pelo código.
  */
 export const APP_CONFIG = {
-  name: 'Nexora Financial',
+  name: 'ByZIFA',
   version: '0.3.0',
 
   // Chaves usadas para persistir dados no localStorage/sessionStorage
