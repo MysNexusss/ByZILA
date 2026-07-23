@@ -1,5 +1,5 @@
 -- ============================================================================
--- NEXORA FINANCIAL — MIGRAÇÃO: campos adicionais em "debts"
+-- BYZIFA — MIGRAÇÃO: campos adicionais em "debts"
 -- ============================================================================
 -- Execute UMA ÚNICA VEZ no SQL Editor do Supabase (projeto já existente).
 -- Adiciona "type", "creditor", "paid_amount" e "notes" à tabela debts,

@@ -1,5 +1,5 @@
 -- ============================================================================
--- NEXORA FINANCIAL — SCHEMA DO BANCO DE DADOS (Supabase / PostgreSQL)
+-- BYZIFA — SCHEMA DO BANCO DE DADOS (Supabase / PostgreSQL)
 -- ============================================================================
 -- Execute este arquivo uma única vez no SQL Editor do Supabase, ANTES de
 -- sql/policies.sql.

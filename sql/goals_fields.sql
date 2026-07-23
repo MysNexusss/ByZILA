@@ -1,5 +1,5 @@
 -- ============================================================================
--- NEXORA FINANCIAL — MIGRAÇÃO: campos adicionais em "goals"
+-- BYZIFA — MIGRAÇÃO: campos adicionais em "goals"
 -- ============================================================================
 -- Execute UMA ÚNICA VEZ no SQL Editor do Supabase (projeto já existente).
 -- Adiciona "category" e "description" à tabela goals, usados pela tela de

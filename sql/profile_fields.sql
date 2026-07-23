@@ -1,5 +1,5 @@
 -- ============================================================================
--- NEXORA FINANCIAL — MIGRAÇÃO: campos de perfil + Storage de avatares
+-- BYZIFA — MIGRAÇÃO: campos de perfil + Storage de avatares
 -- ============================================================================
 -- Execute UMA ÚNICA VEZ no SQL Editor do Supabase (projeto já existente).
 -- Não apaga nem altera dados existentes.

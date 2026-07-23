@@ -1,5 +1,5 @@
 -- ============================================================================
--- NEXORA FINANCIAL — ROW LEVEL SECURITY (RLS) E POLICIES
+-- BYZIFA — ROW LEVEL SECURITY (RLS) E POLICIES
 -- ============================================================================
 -- Execute este arquivo DEPOIS de sql/schema.sql. Ele garante que, mesmo
 -- usando a chave pública "anon" no client (ver js/config.js), cada usuário
