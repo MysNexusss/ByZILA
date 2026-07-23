@@ -1,5 +1,5 @@
 /* ==========================================================================
-   NEXORA FINANCIAL — PÁGINAS
+   BYZIFA — PÁGINAS
    Estilos de composição específicos de cada tela. Nesta fase, contém o
    layout de autenticação (Login e Cadastro) — as demais telas seguem
    reservadas para uma fase futura.
@@ -25,6 +25,13 @@
 .auth-brand {
   text-align: center;
   margin-bottom: var(--space-8);
+}
+
+.auth-brand-mark {
+  width: 52px;
+  height: 52px;
+  display: block;
+  margin: 0 auto var(--space-3);
 }
 
 .auth-brand-name {
@@ -161,6 +168,23 @@
 /* Barra de filtros genérica — usada por Transações e Estatísticas */
 .filters-bar {
   margin-bottom: var(--space-6);
+}
+
+/* --------------------------------------------------------------------
+   Aviso de offline (PWA) — barra fina, sempre no topo da página,
+   independente da rota atual.
+   -------------------------------------------------------------------- */
+.offline-banner {
+  background-color: var(--color-graphite);
+  color: var(--color-white);
+  text-align: center;
+  font-size: var(--text-xs);
+  padding: var(--space-2) var(--space-4);
+  margin: 0;
+}
+
+.offline-banner[hidden] {
+  display: none;
 }
 
 /* --------------------------------------------------------------------
