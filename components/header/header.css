@@ -24,6 +24,12 @@
   gap: var(--space-4);
 }
 
+.header-brand-mark {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+
 .header-brand {
   font-family: var(--font-display);
   font-size: var(--text-md);
