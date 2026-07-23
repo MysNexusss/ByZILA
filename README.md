@@ -1,14 +1,13 @@
-# Nexora Financial
+# ByZIFA
 
 Aplicação de gestão financeira pessoal, construída como uma **SPA estática**
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 11 — Perfil completo: dados pessoais, upload de
-> avatar (Supabase Storage), troca de senha, e tema claro/escuro/sistema
-> persistido no banco. **Requer rodar `sql/profile_fields.sql` no
-> Supabase** (novos campos + bucket de Storage). E-mail é somente leitura
-> nesta fase.
+> **Status atual:** Fase 12 — PWA completo: instalável (Add to Home
+> Screen), funciona offline para o que já foi visitado, atualiza sozinho
+> quando há versão nova, e avisa quando a conexão cai. Nada do Supabase
+> é armazenado em cache — nem dados, nem token de sessão.
 
 ### Testando a autenticação
 
@@ -171,6 +170,22 @@ npx serve .
 
 Acesse `http://localhost:8080`.
 
+### Testando o PWA
+
+Service Workers só funcionam em **HTTPS ou `localhost`** — nunca abrindo
+o `index.html` direto do disco (`file://`). Rodando com `python3 -m
+http.server` (acima) já funciona, porque `localhost` é uma exceção
+liberada pelos navegadores. No GitHub Pages funciona sem nenhum ajuste,
+já que ele serve tudo em HTTPS por padrão.
+
+Para ver o app se atualizando sozinho: mude algo, suba pro GitHub, espere
+o deploy, e recarregue a aba onde o app já estava aberto — em poucos
+segundos aparece o toast de nova versão e a página recarrega sozinha.
+
+Para testar offline: abra o app normal uma vez (pra ele cachear o App
+Shell), depois no DevTools vá em Application → Service Workers → marque
+"Offline", e recarregue.
+
 ---
 
 ## Roadmap
@@ -186,5 +201,5 @@ Acesse `http://localhost:8080`.
 - [x] **Fase 9** — CRUD completo de metas financeiras
 - [x] **Fase 10** — CRUD completo de dívidas
 - [x] **Fase 11** — Perfil (dados, avatar, senha, tema claro/escuro/sistema)
-- [ ] **Fase 12** — PWA completa (manifest, service worker, ícones, offline)
+- [x] **Fase 12** — PWA completa (manifest, service worker, ícones, offline)
 - [ ] **Fase 13** — Deploy e ajustes finais no GitHub Pages
