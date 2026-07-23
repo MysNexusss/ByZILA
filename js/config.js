@@ -17,14 +17,14 @@
  * Encontrada em: Supabase Dashboard > Project Settings > API > Project URL
  * @type {string}
  */
-export const SUPABASE_URL = 'https://SEU-PROJETO.supabase.co';
+export const SUPABASE_URL = 'https://eywnprmdysfspbbkicfv.supabase.co';
 
 /**
  * Chave pública (anon/publishable) do Supabase.
  * Encontrada em: Supabase Dashboard > Project Settings > API > anon public
  * @type {string}
  */
-export const SUPABASE_ANON_KEY = 'SUA_CHAVE_ANON_AQUI';
+export const SUPABASE_ANON_KEY = 'sb_publishable_kHwLL5rzJqAlNmveDA0Lsg_7x1jZmWe';
 
 /**
  * Configurações gerais da aplicação, sem relação com o Supabase.
