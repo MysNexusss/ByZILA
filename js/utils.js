@@ -91,3 +91,19 @@ export function getStoredThemePreference() {
     return 'system';
   }
 }
+
+/**
+ * Atrasa a execução de "fn" até que "delay" ms se passem sem uma nova
+ * chamada — usado nos campos de busca (Transações, Metas, Dívidas) para
+ * não disparar uma consulta ao Supabase a cada tecla digitada.
+ * @param {Function} fn
+ * @param {number} [delay=400]
+ * @returns {Function}
+ */
+export function debounce(fn, delay = 400) {
+  let timeoutId;
+  return (...args) => {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => fn(...args), delay);
+  };
+}
