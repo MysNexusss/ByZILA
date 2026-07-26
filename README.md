@@ -4,10 +4,12 @@ Aplicação de gestão financeira pessoal, construída como uma **SPA estática*
 (sem frameworks e sem build), hospedada no **GitHub Pages** e com
 **Supabase** como backend (banco de dados, autenticação e API).
 
-> **Status atual:** Fase 12 — PWA completo: instalável (Add to Home
-> Screen), funciona offline para o que já foi visitado, atualiza sozinho
-> quando há versão nova, e avisa quando a conexão cai. Nada do Supabase
-> é armazenado em cache — nem dados, nem token de sessão.
+> **Status atual:** Auditoria completa do projeto — imports, navegação,
+> integração Supabase e proteção de rotas conferidos (nenhum problema
+> crítico encontrado). Corrigido: `.nojekyll` ausente, duplicação de
+> debounce/empty-state/badge entre páginas, foco de teclado nos modais,
+> e um resíduo de CSS de um design antigo. Pronto para publicação no
+> GitHub Pages.
 
 ### Testando a autenticação
 
