@@ -219,6 +219,29 @@
 }
 
 /* --------------------------------------------------------------------
+   SKIP LINK — acessibilidade de teclado
+   Fica fora da tela até receber foco (Tab a partir do topo da página),
+   permitindo pular a navegação e ir direto para o conteúdo.
+   -------------------------------------------------------------------- */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: var(--space-4);
+  background-color: var(--color-graphite);
+  color: var(--color-white);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  z-index: var(--z-toast);
+  font-size: var(--text-sm);
+  font-weight: var(--weight-medium);
+  transition: top var(--transition-fast);
+}
+
+.skip-link:focus {
+  top: var(--space-4);
+}
+
+/* --------------------------------------------------------------------
    FORMULÁRIOS
    -------------------------------------------------------------------- */
 .field {
