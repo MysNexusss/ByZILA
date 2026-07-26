@@ -8,18 +8,20 @@
 
 import * as goalService from '../services/goal.service.js';
 import { createEmptyGoal, GOAL_CATEGORIES } from '../models/goal.model.js';
-import { formatCurrency, escapeHtml } from '../js/utils.js';
+import { formatCurrency, escapeHtml, debounce } from '../js/utils.js';
 import { getCurrentUser } from '../js/auth.js';
 import { showToast } from '../components/toast/toast.js';
 import { setFieldError, clearFieldError } from '../components/input/input.js';
 import { setButtonLoading } from '../components/button/button.js';
 import { openModal, closeModal, bindModalDismiss } from '../components/modal/modal.js';
 import { populateOptions } from '../components/select/select.js';
+import { renderEmptyState, renderErrorMessage } from '../components/empty-state/empty-state.js';
+import { renderBadge } from '../components/badge/badge.js';
 
 let currentGoals = [];
 let pendingDeleteId = null;
 
-const STATUS_BADGE = { active: 'badge--gold', completed: 'badge--success', overdue: 'badge--danger' };
+const STATUS_BADGE_VARIANT = { active: 'gold', completed: 'success', overdue: 'danger' };
 const STATUS_LABEL = { active: 'Ativa', completed: 'Concluída', overdue: 'Vencida' };
 
 /* --------------------------------------------------------------------
@@ -36,28 +38,22 @@ function renderSkeletons() {
   `).join('');
 }
 
-function renderEmptyState() {
-  document.getElementById('goals-list').innerHTML = `
-    <div class="empty-state" style="grid-column: 1 / -1;">
-      <h3 class="empty-state-title">Nenhuma meta encontrada</h3>
-      <p class="empty-state-desc">Ajuste os filtros ou crie sua primeira meta.</p>
-      <button class="btn btn--primary btn--sm" type="button" id="empty-state-add-goal">+ Nova meta</button>
-    </div>
-  `;
-  document.getElementById('empty-state-add-goal')?.addEventListener('click', () => openGoalModal());
+function showEmptyState() {
+  renderEmptyState(document.getElementById('goals-list'), {
+    title: 'Nenhuma meta encontrada',
+    description: 'Ajuste os filtros ou crie sua primeira meta.',
+    fullWidth: true,
+    action: { label: '+ Nova meta', onClick: () => openGoalModal() },
+  });
 }
 
-function renderErrorState() {
-  document.getElementById('goals-list').innerHTML = `
-    <div class="card" style="grid-column: 1 / -1;">
-      <p class="empty-state-desc" style="margin: 0;">Não foi possível carregar as metas.</p>
-    </div>
-  `;
+function showErrorState() {
+  renderErrorMessage(document.getElementById('goals-list'), 'Não foi possível carregar as metas.', true);
 }
 
 function renderGoals(goals) {
   if (goals.length === 0) {
-    renderEmptyState();
+    showEmptyState();
     return;
   }
 
@@ -65,7 +61,7 @@ function renderGoals(goals) {
     <div class="card goal-card">
       <div class="goal-card-header">
         <div class="card-title">${escapeHtml(g.title)}</div>
-        <span class="badge ${STATUS_BADGE[g.status]}">${STATUS_LABEL[g.status]}</span>
+        ${renderBadge(STATUS_LABEL[g.status], STATUS_BADGE_VARIANT[g.status])}
       </div>
 
       ${g.category ? `<span class="badge badge--neutral goal-card-category">${escapeHtml(g.category)}</span>` : ''}
@@ -121,7 +117,7 @@ async function loadGoals() {
   } catch (error) {
     console.error('[goals] Falha ao carregar metas:', error);
     currentGoals = [];
-    renderErrorState();
+    showErrorState();
   }
 }
 
@@ -271,11 +267,7 @@ function bindEvents() {
     document.getElementById(id).addEventListener('change', loadGoals);
   });
 
-  let searchTimeout;
-  document.getElementById('filter-search').addEventListener('input', () => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(loadGoals, 400);
-  });
+  document.getElementById('filter-search').addEventListener('input', debounce(loadGoals));
 
   bindModalDismiss(document.getElementById('goal-modal'));
   bindModalDismiss(document.getElementById('delete-goal-modal'));

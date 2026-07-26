@@ -14,6 +14,7 @@ import { getInProgress as getGoalsInProgress } from '../services/goal.service.js
 import { getOpen as getOpenDebts } from '../services/debt.service.js';
 import { formatCurrency, formatDate, escapeHtml } from '../js/utils.js';
 import { getCurrentUser } from '../js/auth.js';
+import { renderEmptyState, renderErrorMessage } from '../components/empty-state/empty-state.js';
 
 function renderGreeting() {
   const user = getCurrentUser();
@@ -67,11 +68,7 @@ async function loadSummary() {
     `;
   } catch (error) {
     console.error('[dashboard] Falha ao carregar resumo:', error);
-    container.innerHTML = `
-      <div class="card" style="grid-column: 1 / -1;">
-        <p class="empty-state-desc" style="margin: 0;">Não foi possível carregar o resumo financeiro.</p>
-      </div>
-    `;
+    renderErrorMessage(container, 'Não foi possível carregar o resumo financeiro.', true);
   }
 }
 
@@ -81,12 +78,11 @@ async function loadRecentTransactions() {
     const transactions = await getRecentTransactions(5);
 
     if (transactions.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state empty-state--compact">
-          <h3 class="empty-state-title">Nenhuma transação ainda</h3>
-          <p class="empty-state-desc">Suas transações mais recentes vão aparecer aqui.</p>
-        </div>
-      `;
+      renderEmptyState(container, {
+        title: 'Nenhuma transação ainda',
+        description: 'Suas transações mais recentes vão aparecer aqui.',
+        compact: true,
+      });
       return;
     }
 
@@ -103,7 +99,7 @@ async function loadRecentTransactions() {
     `).join('');
   } catch (error) {
     console.error('[dashboard] Falha ao carregar transações:', error);
-    container.innerHTML = '<p class="empty-state-desc">Não foi possível carregar as transações.</p>';
+    renderErrorMessage(container, 'Não foi possível carregar as transações.');
   }
 }
 
@@ -113,12 +109,11 @@ async function loadGoals() {
     const goals = await getGoalsInProgress(3);
 
     if (goals.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state empty-state--compact">
-          <h3 class="empty-state-title">Nenhuma meta em andamento</h3>
-          <p class="empty-state-desc">Metas criadas vão aparecer aqui.</p>
-        </div>
-      `;
+      renderEmptyState(container, {
+        title: 'Nenhuma meta em andamento',
+        description: 'Metas criadas vão aparecer aqui.',
+        compact: true,
+      });
       return;
     }
 
@@ -134,7 +129,7 @@ async function loadGoals() {
     `).join('');
   } catch (error) {
     console.error('[dashboard] Falha ao carregar metas:', error);
-    container.innerHTML = '<p class="empty-state-desc">Não foi possível carregar as metas.</p>';
+    renderErrorMessage(container, 'Não foi possível carregar as metas.');
   }
 }
 
@@ -144,12 +139,11 @@ async function loadDebts() {
     const debts = await getOpenDebts(3);
 
     if (debts.length === 0) {
-      container.innerHTML = `
-        <div class="empty-state empty-state--compact">
-          <h3 class="empty-state-title">Nenhuma dívida em aberto</h3>
-          <p class="empty-state-desc">Dívidas cadastradas vão aparecer aqui.</p>
-        </div>
-      `;
+      renderEmptyState(container, {
+        title: 'Nenhuma dívida em aberto',
+        description: 'Dívidas cadastradas vão aparecer aqui.',
+        compact: true,
+      });
       return;
     }
 
@@ -164,7 +158,7 @@ async function loadDebts() {
     `).join('');
   } catch (error) {
     console.error('[dashboard] Falha ao carregar dívidas:', error);
-    container.innerHTML = '<p class="empty-state-desc">Não foi possível carregar as dívidas.</p>';
+    renderErrorMessage(container, 'Não foi possível carregar as dívidas.');
   }
 }
 

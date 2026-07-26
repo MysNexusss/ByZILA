@@ -8,13 +8,15 @@
 
 import * as debtService from '../services/debt.service.js';
 import { createEmptyDebt, DEBT_TYPES } from '../models/debt.model.js';
-import { formatCurrency, formatDate, escapeHtml } from '../js/utils.js';
+import { formatCurrency, formatDate, escapeHtml, debounce } from '../js/utils.js';
 import { getCurrentUser } from '../js/auth.js';
 import { showToast } from '../components/toast/toast.js';
 import { setFieldError, clearFieldError } from '../components/input/input.js';
 import { setButtonLoading } from '../components/button/button.js';
 import { openModal, closeModal, bindModalDismiss } from '../components/modal/modal.js';
 import { populateOptions } from '../components/select/select.js';
+import { renderEmptyState, renderErrorMessage } from '../components/empty-state/empty-state.js';
+import { renderBadge } from '../components/badge/badge.js';
 
 let currentDebts = [];
 let pendingDeleteId = null;
@@ -64,11 +66,7 @@ async function loadSummary() {
     renderSummary(summary);
   } catch (error) {
     console.error('[debts] Falha ao carregar resumo:', error);
-    document.getElementById('debts-summary').innerHTML = `
-      <div class="card" style="grid-column: 1 / -1;">
-        <p class="empty-state-desc" style="margin: 0;">Não foi possível carregar o resumo.</p>
-      </div>
-    `;
+    renderErrorMessage(document.getElementById('debts-summary'), 'Não foi possível carregar o resumo.', true);
   }
 }
 
@@ -86,30 +84,24 @@ function renderSkeletons() {
   `).join('');
 }
 
-function renderEmptyState() {
-  document.getElementById('debts-list').innerHTML = `
-    <div class="empty-state" style="grid-column: 1 / -1;">
-      <h3 class="empty-state-title">Nenhuma dívida encontrada</h3>
-      <p class="empty-state-desc">Ajuste os filtros ou cadastre sua primeira dívida.</p>
-      <button class="btn btn--primary btn--sm" type="button" id="empty-state-add-debt">+ Nova dívida</button>
-    </div>
-  `;
-  document.getElementById('empty-state-add-debt')?.addEventListener('click', () => openDebtModal());
+function showEmptyState() {
+  renderEmptyState(document.getElementById('debts-list'), {
+    title: 'Nenhuma dívida encontrada',
+    description: 'Ajuste os filtros ou cadastre sua primeira dívida.',
+    fullWidth: true,
+    action: { label: '+ Nova dívida', onClick: () => openDebtModal() },
+  });
 }
 
-function renderErrorState() {
-  document.getElementById('debts-list').innerHTML = `
-    <div class="card" style="grid-column: 1 / -1;">
-      <p class="empty-state-desc" style="margin: 0;">Não foi possível carregar as dívidas.</p>
-    </div>
-  `;
+function showErrorState() {
+  renderErrorMessage(document.getElementById('debts-list'), 'Não foi possível carregar as dívidas.', true);
 }
 
 function statusBadge(debt) {
-  if (debt.status === 'paid') return { cls: 'badge--success', label: STATUS_LABEL.paid };
-  if (debt.status === 'overdue') return { cls: 'badge--danger', label: STATUS_LABEL.overdue };
-  if (debt.isDueSoon) return { cls: 'badge--info', label: 'Vence em breve' };
-  return { cls: 'badge--gold', label: STATUS_LABEL.open };
+  if (debt.status === 'paid') return { variant: 'success', label: STATUS_LABEL.paid };
+  if (debt.status === 'overdue') return { variant: 'danger', label: STATUS_LABEL.overdue };
+  if (debt.isDueSoon) return { variant: 'info', label: 'Vence em breve' };
+  return { variant: 'gold', label: STATUS_LABEL.open };
 }
 
 function formatDueLabel(debt) {
@@ -123,7 +115,7 @@ function formatDueLabel(debt) {
 
 function renderDebts(debts) {
   if (debts.length === 0) {
-    renderEmptyState();
+    showEmptyState();
     return;
   }
 
@@ -144,7 +136,7 @@ function renderDebts(debts) {
             <div class="card-title">${escapeHtml(d.title)}</div>
             <div class="card-subtitle">${[d.creditor, d.type].filter(Boolean).map(escapeHtml).join(' · ') || '—'}</div>
           </div>
-          <span class="badge ${badge.cls}">${badge.label}</span>
+          ${renderBadge(badge.label, badge.variant)}
         </div>
 
         <div class="progress-bar"><div class="progress-bar-fill" style="width: ${d.progress}%;"></div></div>
@@ -192,7 +184,7 @@ async function loadDebts() {
   } catch (error) {
     console.error('[debts] Falha ao carregar dívidas:', error);
     currentDebts = [];
-    renderErrorState();
+    showErrorState();
   }
 }
 
@@ -351,11 +343,7 @@ function bindEvents() {
     document.getElementById(id).addEventListener('change', loadDebts);
   });
 
-  let searchTimeout;
-  document.getElementById('filter-debt-search').addEventListener('input', () => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(loadDebts, 400);
-  });
+  document.getElementById('filter-debt-search').addEventListener('input', debounce(loadDebts));
 
   bindModalDismiss(document.getElementById('debt-modal'));
   bindModalDismiss(document.getElementById('delete-debt-modal'));

@@ -9,13 +9,14 @@
 import * as transactionService from '../services/transaction.service.js';
 import * as categoryService from '../services/category.service.js';
 import { createEmptyTransaction } from '../models/transaction.model.js';
-import { formatCurrency, formatDate, escapeHtml } from '../js/utils.js';
+import { formatCurrency, formatDate, escapeHtml, debounce } from '../js/utils.js';
 import { getCurrentUser } from '../js/auth.js';
 import { showToast } from '../components/toast/toast.js';
 import { setFieldError, clearFieldError } from '../components/input/input.js';
 import { setButtonLoading } from '../components/button/button.js';
 import { openModal, closeModal, bindModalDismiss } from '../components/modal/modal.js';
 import { populateOptions } from '../components/select/select.js';
+import { renderEmptyState, renderErrorMessage } from '../components/empty-state/empty-state.js';
 
 let categories = [];
 let currentTransactions = [];
@@ -32,25 +33,25 @@ function renderSkeletonRows() {
   `).join('');
 }
 
-function renderEmptyState() {
-  document.getElementById('transactions-table-body').innerHTML = `
-    <tr><td colspan="5">
-      <div class="empty-state empty-state--compact">
-        <h3 class="empty-state-title">Nenhuma transação encontrada</h3>
-        <p class="empty-state-desc">Ajuste os filtros ou adicione sua primeira transação.</p>
-      </div>
-    </td></tr>
-  `;
+function showEmptyState() {
+  const tbody = document.getElementById('transactions-table-body');
+  tbody.innerHTML = '<tr><td colspan="5"></td></tr>';
+  renderEmptyState(tbody.querySelector('td'), {
+    title: 'Nenhuma transação encontrada',
+    description: 'Ajuste os filtros ou adicione sua primeira transação.',
+    compact: true,
+  });
 }
 
-function renderErrorState(message) {
-  document.getElementById('transactions-table-body').innerHTML =
-    `<tr><td colspan="5"><p class="empty-state-desc">${escapeHtml(message)}</p></td></tr>`;
+function showErrorState(message) {
+  const tbody = document.getElementById('transactions-table-body');
+  tbody.innerHTML = '<tr><td colspan="5"></td></tr>';
+  renderErrorMessage(tbody.querySelector('td'), message);
 }
 
 function renderTransactions(transactions) {
   if (transactions.length === 0) {
-    renderEmptyState();
+    showEmptyState();
     return;
   }
 
@@ -89,7 +90,7 @@ async function loadTransactions() {
   } catch (error) {
     console.error('[transactions] Falha ao carregar transações:', error);
     currentTransactions = [];
-    renderErrorState('Não foi possível carregar as transações.');
+    showErrorState('Não foi possível carregar as transações.');
   }
 }
 
@@ -255,11 +256,7 @@ function bindEvents() {
     document.getElementById(id).addEventListener('change', loadTransactions);
   });
 
-  let searchTimeout;
-  document.getElementById('filter-search').addEventListener('input', () => {
-    clearTimeout(searchTimeout);
-    searchTimeout = setTimeout(loadTransactions, 400);
-  });
+  document.getElementById('filter-search').addEventListener('input', debounce(loadTransactions));
 
   bindModalDismiss(document.getElementById('transaction-modal'));
   bindModalDismiss(document.getElementById('delete-modal'));
