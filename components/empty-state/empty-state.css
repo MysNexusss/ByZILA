@@ -38,3 +38,7 @@
 .empty-state--compact .empty-state-desc {
   margin-bottom: 0;
 }
+
+.empty-state--full {
+  grid-column: 1 / -1;
+}
